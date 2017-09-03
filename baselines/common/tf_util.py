@@ -5,7 +5,7 @@ from __future__ import print_function
 import numpy as np
 import tensorflow as tf  # pylint: ignore-module
 try:
-import builtins
+    import builtins
 except ImportError:
     import future_builtins as builtins
 import functools

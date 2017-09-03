@@ -39,7 +39,7 @@ def train(env, nb_epochs, nb_epoch_cycles, render_eval, reward_scale, render, pa
         saver = tf.train.Saver()
     else:
         saver = None
-    
+
     step = 0
     episode = 0
     eval_episode_rewards_history = deque(maxlen=100)
@@ -158,7 +158,7 @@ def train(env, nb_epochs, nb_epoch_cycles, render_eval, reward_scale, render, pa
             combined_stats['rollout/actions_mean'] = mpi_mean(epoch_actions)
             combined_stats['rollout/actions_std'] = mpi_std(epoch_actions)
             combined_stats['rollout/Q_mean'] = mpi_mean(epoch_qs)
-    
+
             # Train statistics.
             combined_stats['train/loss_actor'] = mpi_mean(epoch_actor_losses)
             combined_stats['train/loss_critic'] = mpi_mean(epoch_critic_losses)
@@ -177,7 +177,7 @@ def train(env, nb_epochs, nb_epoch_cycles, render_eval, reward_scale, render, pa
             combined_stats['total/episodes'] = mpi_mean(episodes)
             combined_stats['total/epochs'] = epoch + 1
             combined_stats['total/steps'] = t
-            
+
             for key in sorted(combined_stats.keys()):
                 logger.record_tabular(key, combined_stats[key])
             logger.dump_tabular()

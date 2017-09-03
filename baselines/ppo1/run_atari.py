@@ -29,7 +29,7 @@ def train(env_id, num_frames, seed):
     env = gym.make(env_id)
     def policy_fn(name, ob_space, ac_space): #pylint: disable=W0613
         return cnn_policy.CnnPolicy(name=name, ob_space=ob_space, ac_space=ac_space)
-    env = bench.Monitor(env, logger.get_dir() and 
+    env = bench.Monitor(env, logger.get_dir() and
         osp.join(logger.get_dir(), "%i.monitor.json" % rank))
     env.seed(workerseed)
     gym.logger.setLevel(logging.WARN)

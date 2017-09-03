@@ -31,7 +31,7 @@ def train(env_id, num_timesteps, seed):
     def policy_fn(name, ob_space, ac_space):
         return MlpPolicy(name=name, ob_space=env.observation_space, ac_space=env.action_space,
             hid_size=32, num_hid_layers=2)
-    env = bench.Monitor(env, logger.get_dir() and 
+    env = bench.Monitor(env, logger.get_dir() and
         osp.join(logger.get_dir(), "%i.monitor.json" % rank))
     env.seed(workerseed)
     gym.logger.setLevel(logging.WARN)

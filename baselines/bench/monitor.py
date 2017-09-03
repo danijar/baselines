@@ -59,7 +59,7 @@ class Monitor(Wrapper):
             self.f = open(filename, "r+t")
             for _ in range(nlines):
                 self.f.readline()
-            self.f.truncate()        
+            self.f.truncate()
             self.logger = JSONLogger(self.f)
 
 
@@ -141,7 +141,7 @@ def load_results(dir, raw_episodes=False):
     for header in headers[1:]:
         assert header['env_id'] == header0['env_id'], "mixing data from two envs"
     episodes = sorted(episodes, key=lambda e: e['abstime'])
-    if raw_episodes: 
+    if raw_episodes:
         return episodes
     else:
         return {

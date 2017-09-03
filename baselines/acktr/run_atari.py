@@ -13,7 +13,7 @@ from baselines.common.atari_wrappers import wrap_deepmind
 from baselines.acktr.policies import CnnPolicy
 
 def train(env_id, num_frames, seed, num_cpu):
-    num_timesteps = int(num_frames / 4 * 1.1) 
+    num_timesteps = int(num_frames / 4 * 1.1)
     def make_env(rank):
         def _thunk():
             env = gym.make(env_id)
@@ -36,7 +36,7 @@ def main():
     parser.add_argument('--seed', help='RNG seed', type=int, default=0)
     parser.add_argument('--million_frames', help='How many frames to train (/ 1e6). '
         'This number gets divided by 4 due to frameskip', type=int, default=40)
-    args = parser.parse_args()    
+    args = parser.parse_args()
     train(args.env, num_frames=1e6 * args.million_frames, seed=args.seed, num_cpu=32)
 
 

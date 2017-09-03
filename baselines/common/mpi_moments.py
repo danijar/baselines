@@ -12,8 +12,8 @@ def mpi_moments(x, axis=0):
     newshape.pop(axis)
     n = np.prod(newshape,dtype=int)
     totalvec = np.zeros(n*2+1, 'float64')
-    addvec = np.concatenate([x.sum(axis=axis).ravel(), 
-        np.square(x).sum(axis=axis).ravel(), 
+    addvec = np.concatenate([x.sum(axis=axis).ravel(),
+        np.square(x).sum(axis=axis).ravel(),
         np.array([x.shape[axis]],dtype='float64')])
     MPI.COMM_WORLD.Allreduce(addvec, totalvec, op=MPI.SUM)
     sum = totalvec[:n]
