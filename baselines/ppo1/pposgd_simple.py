@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 from baselines.common import Dataset, explained_variance, fmt_row, zipsame
 from baselines import logger
 import baselines.common.tf_util as U
@@ -77,7 +81,7 @@ def add_vtarg_and_adv(seg, gamma, lam):
         gaelam[t] = lastgaelam = delta + gamma * lam * nonterminal * lastgaelam
     seg["tdlamret"] = seg["adv"] + seg["vpred"]
 
-def learn(env, policy_func, *,
+def learn(env, policy_func,
         timesteps_per_batch, # timesteps per actor per update
         clip_param, entcoeff, # clipping parameter epsilon, entropy coeff
         optim_epochs, optim_stepsize, optim_batchsize,# optimization hypers
@@ -161,7 +165,7 @@ def learn(env, policy_func, *,
 
         logger.log("********** Iteration %i ************"%iters_so_far)
 
-        seg = seg_gen.__next__()
+        seg = next(seg_gen)
         add_vtarg_and_adv(seg, gamma, lam)
 
         # ob, ac, atarg, ret, td1ret = map(np.concatenate, (obs, acs, atargs, rets, td1rets))
@@ -180,8 +184,9 @@ def learn(env, policy_func, *,
         for _ in range(optim_epochs):
             losses = [] # list of tuples, each of which gives the loss for a minibatch
             for batch in d.iterate_once(optim_batchsize):
-                *newlosses, g = lossandgrad(batch["ob"], batch["ac"], batch["atarg"], batch["vtarg"], cur_lrmult)
-                adam.update(g, optim_stepsize * cur_lrmult) 
+                results = lossandgrad(batch["ob"], batch["ac"], batch["atarg"], batch["vtarg"], cur_lrmult)
+                newlosses, g = results[:-1], results[-1]
+                adam.update(g, optim_stepsize * cur_lrmult)
                 losses.append(newlosses)
             logger.log(fmt_row(13, np.mean(losses, axis=0)))
 
@@ -189,7 +194,7 @@ def learn(env, policy_func, *,
         losses = []
         for batch in d.iterate_once(optim_batchsize):
             newlosses = compute_losses(batch["ob"], batch["ac"], batch["atarg"], batch["vtarg"], cur_lrmult)
-            losses.append(newlosses)            
+            losses.append(newlosses)
         meanlosses,_,_ = mpi_moments(losses, axis=0)
         logger.log(fmt_row(13, meanlosses))
         for (lossval, name) in zipsame(meanlosses, loss_names):

@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import numpy as np
 def cg(f_Ax, b, cg_iters=10, callback=None, verbose=False, residual_tol=1e-10):
     """

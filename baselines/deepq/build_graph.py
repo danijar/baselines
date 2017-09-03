@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 """Deep Q learning graph
 
 The functions in this file can are used to create the following functions:

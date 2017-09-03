@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 from baselines.common import explained_variance, zipsame, dataset
 from baselines import logger
 import baselines.common.tf_util as U

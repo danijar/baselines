@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 #!/usr/bin/env python
 from baselines.common import set_global_seeds, tf_util as U
 from baselines import bench

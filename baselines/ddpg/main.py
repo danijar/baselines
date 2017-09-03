@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import argparse
 import time
 import os
@@ -15,6 +19,7 @@ from baselines.ddpg.noise import *
 import gym
 import tensorflow as tf
 from mpi4py import MPI
+
 
 def run(env_id, seed, noise_type, layer_norm, evaluation, **kwargs):
     # Configure things.
@@ -81,7 +86,6 @@ def run(env_id, seed, noise_type, layer_norm, evaluation, **kwargs):
 
 def parse_args():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    
     parser.add_argument('--env-id', type=str, default='HalfCheetah-v1')
     boolean_flag(parser, 'render-eval', default=False)
     boolean_flag(parser, 'layer-norm', default=True)

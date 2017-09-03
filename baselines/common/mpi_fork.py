@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import os, subprocess, sys
 
 def mpi_fork(n, bind_to_core=False):

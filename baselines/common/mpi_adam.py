@@ -1,10 +1,14 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 from mpi4py import MPI
 import baselines.common.tf_util as U
 import tensorflow as tf
 import numpy as np
 
 class MpiAdam(object):
-    def __init__(self, var_list, *, beta1=0.9, beta2=0.999, epsilon=1e-08, scale_grad_by_procs=True, comm=None):
+    def __init__(self, var_list, _block_positional_args=None, beta1=0.9, beta2=0.999, epsilon=1e-08, scale_grad_by_procs=True, comm=None):
         self.var_list = var_list
         self.beta1 = beta1
         self.beta2 = beta2

@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 from copy import copy
 from functools import reduce
 
@@ -340,8 +344,10 @@ class DDPG(object):
         stats = dict(zip(names, values))
 
         if self.param_noise is not None:
-            stats = {**stats, **self.param_noise.get_stats()}
-
+            new_stats = {}
+            new_stats.update(stats)
+            new_stats.update(self.param_noise.get_stats())
+            stats = new_stats
         return stats
 
     def adapt_param_noise(self):

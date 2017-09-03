@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 """This file is used for specifying various schedules that evolve over
 time throughout the execution of the algorithm, such as:
  - learning rate for the optimizer

@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 from baselines.common.mpi_running_mean_std import RunningMeanStd
 import baselines.common.tf_util as U
 import tensorflow as tf
